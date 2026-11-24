@@ -16,9 +16,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+
       - name: Install and Build
         run: |
-          npm install
+          npm ci --include=optional --registry=https://registry.npmjs.org --replace-registry-host=always
           npm run build
 
       - name: Deploy
